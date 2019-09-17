@@ -31,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 300.0,
+              expandedHeight: 250.0,
               leading: Icon(
-                Icons.menu,color: Colors.white,
+                Icons.menu,
+                color: Colors.white,
               ),
               floating: false,
               pinned: true,
@@ -65,7 +67,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               Text(
                                 "Total",
                                 style: TextStyle(
-                                    color: Color.fromRGBO(209, 221, 237, 1), fontSize: 20),
+                                    color: Color.fromRGBO(209, 221, 237, 1),
+                                    fontSize: 20),
                               )
                             ],
                           ),
@@ -74,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Container(
-                              margin: EdgeInsets.only(bottom: 30),
+                              margin: EdgeInsets.fromLTRB(0, 8, 0, 10),
                               width: 90,
                               height: 90,
                               child: CircleAvatar(
@@ -84,11 +87,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text(
                               "Rahul Vadya",
                               style: TextStyle(
-                                  color: Color.fromRGBO(209, 221, 237, 1), fontSize: 20),
+                                  color: Color.fromRGBO(209, 221, 237, 1),
+                                  fontSize: 16),
                             )
                           ],
-
-
                         ),
                         Container(
                           child: Column(
@@ -104,7 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               Text(
                                 "Pending",
                                 style: TextStyle(
-                                    color: Color.fromRGBO(209, 221, 237, 1), fontSize: 20),
+                                    color: Color.fromRGBO(209, 221, 237, 1),
+                                    fontSize: 20),
                               )
                             ],
                           ),
@@ -118,82 +121,147 @@ class _MyHomePageState extends State<MyHomePage> {
 //          fit: BoxFit.cover,
 //          )
                   ),
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(48.0),
+                child: Container(
+                  color: Colors.white,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(8.0),
+                          child: ChoiceChip(
+                            label: Text("Technology"),
+//                          backgroundColor: Color.fromRGBO(185,205, 237, 1),
+                            selectedColor: Color.fromRGBO(242, 218, 242, 1),
+                            disabledColor: Color.fromRGBO(185, 205, 237, 1),
+                            onSelected: (selected){
+                              setState(() {
+                                isSelected = selected;
+                              });
 
+                            },
+                            selected: false,
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(8.0),
+                            child: ChoiceChip(
+                              label: Text("Arts"),
+//                          backgroundColor: Color.fromRGBO(242, 218, 242, 1),
+                              selectedColor: Color.fromRGBO(242, 218, 242, 1),
+                              disabledColor: Color.fromRGBO(242, 218, 242, 1),
+                              selected: false,
+                            )),
+                        Container(
+                            margin: EdgeInsets.all(8.0),
+                            child: ChoiceChip(
+                              label: Text("Entertainment"),
+                              backgroundColor: Colors.amber,
+                              selected: true,
+                            )),
+                        Container(
+                            margin: EdgeInsets.all(8.0),
+                            child: ChoiceChip(
+                              label: Text("General Awareness"),
+                              backgroundColor: Colors.amber,
+                              selected: true,
+                            ))
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
 
 //            Text("THis is Next")
           ];
         },
         body: Center(
-          child:
-              ListView(
-                children: <Widget>[
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  ),
-                  ListTile(
-                    title: Text("Data 1"),
-                    subtitle: Text("Sub 1"),
-                  )
-                ],
-              ),
+          child: Container(
+//              237, 240, 245
+            color: Color.fromRGBO(237, 240, 245, 1),
+            child: ListView(
+              children: <Widget>[
+                itemCard(),
+                itemCard(),
+                itemCard(),
+                itemCard(),
+                itemCard(),
+                itemCard(),
+                itemCard()
 
+              ],
+            ),
           ),
         ),
-      );
-      // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+    );
+    // This trailing comma makes auto-formatting nicer for build methods.
+  }
 
+  Container itemCard() {
+    return Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
+              child: Card(
+                elevation: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Flutter Basics",style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.indigo
+                      ),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8,4,0,4),
+                      child: Text("20 - Questions",style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.pink
+                      ),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text("To get analysis about the basic concepts observed by ordience",style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.black
+                      ),),
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.calendar_today,size: 15,color: Colors.black54,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("26-05-2019",style: TextStyle(color: Colors.cyan),),
+                        ),
+                         Text("to",style: TextStyle(color: Colors.cyan)),
+
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("30-05-2019",style: TextStyle(color: Colors.cyan)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            );
   }
 }
+
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate(this._tabBar);
 
@@ -201,6 +269,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get minExtent => _tabBar.preferredSize.height;
+
   @override
   double get maxExtent => _tabBar.preferredSize.height;
 
