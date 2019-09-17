@@ -32,6 +32,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isSelected = false;
+  List<String> reportList = [
+    "Technology",
+    "Arts"
+    "General Awareness",
+    "Sports",
+    "History",
+    "Entertainment"
+  ];
+  List<String> selectedReportList = List();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,60 +132,68 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(48.0),
-                child: Container(
+                child:
+                Container(
                   color: Colors.white,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          child: ChoiceChip(
-                            label: Text("Technology"),
-//                          backgroundColor: Color.fromRGBO(185,205, 237, 1),
-                            selectedColor: Color.fromRGBO(242, 218, 242, 1),
-                            disabledColor: Color.fromRGBO(185, 205, 237, 1),
-                            onSelected: (selected){
-                              setState(() {
-                                isSelected = selected;
-                              });
-
-                            },
-                            selected: false,
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.all(8.0),
-                            child: ChoiceChip(
-                              label: Text("Arts"),
-//                          backgroundColor: Color.fromRGBO(242, 218, 242, 1),
-                              selectedColor: Color.fromRGBO(242, 218, 242, 1),
-                              disabledColor: Color.fromRGBO(242, 218, 242, 1),
-                              selected: false,
-                            )),
-                        Container(
-                            margin: EdgeInsets.all(8.0),
-                            child: ChoiceChip(
-                              label: Text("Entertainment"),
-                              backgroundColor: Colors.amber,
-                              selected: true,
-                            )),
-                        Container(
-                            margin: EdgeInsets.all(8.0),
-                            child: ChoiceChip(
-                              label: Text("General Awareness"),
-                              backgroundColor: Colors.amber,
-                              selected: true,
-                            ))
-                      ],
-                    ),
+          MultiSelectChip(
+          reportList,
+          onSelectionChanged: (selectedList) {
+          setState(() {
+          selectedReportList = selectedList;
+          });
+          })
+//                    Row(
+//                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                      children: <Widget>[
+//                        Container(
+//                          margin: EdgeInsets.all(8.0),
+//                          child: ChoiceChip(
+//                            label: Text("Technology"),
+////                          backgroundColor: Color.fromRGBO(185,205, 237, 1),
+//                            selectedColor: Color.fromRGBO(242, 218, 242, 1),
+//                            disabledColor: Color.fromRGBO(185, 205, 237, 1),
+//                            onSelected: (selected){
+//                              setState(() {
+//                                isSelected = selected;
+//                              });
+//
+//                            },
+//                            selected: false,
+//                          ),
+//                        ),
+//                        Container(
+//                            margin: EdgeInsets.all(8.0),
+//                            child: ChoiceChip(
+//                              label: Text("Arts"),
+////                          backgroundColor: Color.fromRGBO(242, 218, 242, 1),
+//                              selectedColor: Color.fromRGBO(242, 218, 242, 1),
+//                              disabledColor: Color.fromRGBO(242, 218, 242, 1),
+//                              selected: false,
+//                            )),
+//                        Container(
+//                            margin: EdgeInsets.all(8.0),
+//                            child: ChoiceChip(
+//                              label: Text("Entertainment"),
+//                              backgroundColor: Colors.amber,
+//                              selected: true,
+//                            )),
+//                        Container(
+//                            margin: EdgeInsets.all(8.0),
+//                            child: ChoiceChip(
+//                              label: Text("General Awareness"),
+//                              backgroundColor: Colors.amber,
+//                              selected: true,
+//                            ))
+//                      ],
+//                    ),
                   ),
                 ),
-              ),
-            ),
 
+            ),
+            )
 //            Text("THis is Next")
           ];
         },
@@ -203,86 +220,123 @@ class _MyHomePageState extends State<MyHomePage> {
     // This trailing comma makes auto-formatting nicer for build methods.
   }
 
-  Container itemCard() {
-    return Container(
-              width: double.infinity,
-              margin: EdgeInsets.fromLTRB(8, 8, 8, 4),
-              child: Card(
-                elevation: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+  Stack itemCard() {
+    return Stack(
+      alignment: Alignment.topRight,
+      children: <Widget>[
+        Container(
+          width: double.infinity,
+          margin: EdgeInsets.fromLTRB(8, 0, 4, 8),
+          child: Card(
+            elevation: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Flutter Basics",style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.indigo
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8,0,0,4),
+                  child: Text("20 - Questions",style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.pink
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text("To get analysis about the basic concepts observed by ordience",style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black
+                  ),),
+                ),
+                Row(
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Flutter Basics",style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.indigo
-                      ),),
+                      child: Icon(Icons.calendar_today,size: 15,color: Colors.black54,
+                      ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(8,4,0,4),
-                      child: Text("20 - Questions",style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.pink
-                      ),),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("26-05-2019",style: TextStyle(color: Colors.cyan),),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Text("To get analysis about the basic concepts observed by ordience",style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.black
-                      ),),
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.calendar_today,size: 15,color: Colors.black54,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("26-05-2019",style: TextStyle(color: Colors.cyan),),
-                        ),
-                         Text("to",style: TextStyle(color: Colors.cyan)),
+                    Text("to",style: TextStyle(color: Colors.cyan)),
 
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("30-05-2019",style: TextStyle(color: Colors.cyan)),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("30-05-2019",style: TextStyle(color: Colors.cyan)),
                     )
                   ],
-                ),
-              ),
-            );
-  }
-}
+                )
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            width: 30,
+            height: 30,
+            child: Image(
+              image: AssetImage("assets/icons/ok.png"),
+            ),
+          ),
+        )
+      ],
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      child: _tabBar,
     );
   }
 
+}
+class MultiSelectChip extends StatefulWidget {
+  final List<String> reportList;
+  final Function(List<String>) onSelectionChanged; // +added
+  MultiSelectChip(
+      this.reportList,
+      {this.onSelectionChanged} // +added
+      );
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
+  _MultiSelectChipState createState() => _MultiSelectChipState();
+}
+class _MultiSelectChipState extends State<MultiSelectChip> {
+  // String selectedChoice = "";
+  List<String> selectedChoices = List();
+  _buildChoiceList() {
+    List<Widget> choices = List();
+    widget.reportList.forEach((item) {
+      choices.add(Container(
+        padding: const EdgeInsets.all(2.0),
+        child: ChoiceChip(
+          selectedColor: Color.fromRGBO(242, 218, 242, 1),
+          disabledColor: Color.fromRGBO(185,205, 237, 1),
+          backgroundColor: Color.fromRGBO(185,205, 237, 1),
+          label: Text(item),
+          selected: selectedChoices.contains(item),
+          onSelected: (selected) {
+            setState(() {
+              selectedChoices.contains(item)
+                  ? selectedChoices.remove(item)
+                  : selectedChoices.add(item);
+              widget.onSelectionChanged(selectedChoices); // +added
+            });
+          },
+        ),
+      ));
+    });
+    return choices;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: _buildChoiceList(),
+    );
   }
 }
+
