@@ -50,6 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pink,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -68,6 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.menu,
                 color: Colors.white,
               ),
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ),
+                )
+              ],
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
