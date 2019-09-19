@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quize_mocup/quizes.dart';
 import 'package:quize_mocup/service_firebase.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quize_mocup/resource.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -207,23 +209,23 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
 }
 
 class QuizListItemView extends StatefulWidget {
-  DocumentSnapshot document;
+  Quizes quiz;
 
-  QuizListItemView(this.document);
+  QuizListItemView(this.quiz);
 
   @override
-  _QuizListItemViewState createState() => _QuizListItemViewState(this.document);
+  _QuizListItemViewState createState() => _QuizListItemViewState(this.quiz);
 }
 
 class _QuizListItemViewState extends State<QuizListItemView> {
-  DocumentSnapshot document;
+  Quizes quiz;
 
-  _QuizListItemViewState(this.document);
+  _QuizListItemViewState(this.quiz);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topRight,
+      alignment: Alignment.centerRight,
       children: <Widget>[
         Container(
           width: double.infinity,
@@ -232,11 +234,12 @@ class _QuizListItemViewState extends State<QuizListItemView> {
             elevation: 4,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    document["title"],
+                    quiz.title,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -247,7 +250,7 @@ class _QuizListItemViewState extends State<QuizListItemView> {
                   padding: const EdgeInsets.fromLTRB(8, 0, 0, 4),
                   child: Text(
                     //todo: get the array and map it to the custom model and fetch the array size
-                    (document["questions"]).toString() + " - Questions",
+                    quiz.questions.length.toString() + " - Questions",
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -267,14 +270,23 @@ class _QuizListItemViewState extends State<QuizListItemView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "26-05-2019",
+                        DateFormat("dd-MM-yyyy")
+                            .format(Timestamp.fromDate(
+                                    quiz.activeTimePeriod['start'])
+                                .toDate())
+                            .toString(),
                         style: TextStyle(color: Colors.cyan),
                       ),
                     ),
                     Text("to", style: TextStyle(color: Colors.cyan)),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("30-05-2019",
+                      child: Text(
+                          DateFormat("dd-MM-yyyy")
+                              .format(Timestamp.fromDate(
+                                      quiz.activeTimePeriod['end'])
+                                  .toDate())
+                              .toString(),
                           style: TextStyle(color: Colors.cyan)),
                     )
                   ],
@@ -286,11 +298,7 @@ class _QuizListItemViewState extends State<QuizListItemView> {
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Container(
-            width: 30,
-            height: 30,
-            child: Image(
-              image: AssetImage("assets/icons/ok.png"),
-            ),
+            child: Text(quiz.status),
           ),
         )
       ],
