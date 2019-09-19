@@ -75,15 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.menu,
                 color: Colors.white,
               ),
-              actions: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.refresh,
-                    color: Colors.white,
-                  ),
-                )
-              ],
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
